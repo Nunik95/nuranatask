@@ -75,7 +75,7 @@ public class Employee {
         return age;
     }
 
-    public void setAge(int salary) {
+    public void setAge(int age) {
         this.age = age;
     }
      
