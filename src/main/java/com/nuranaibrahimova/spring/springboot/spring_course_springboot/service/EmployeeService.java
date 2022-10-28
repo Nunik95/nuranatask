@@ -4,16 +4,20 @@
  */
 package com.nuranaibrahimova.spring.springboot.spring_course_springboot.service;
 
+import com.nuranaibrahimova.spring.springboot.spring_course_springboot.dto.EmployeeDTO;
 import com.nuranaibrahimova.spring.springboot.spring_course_springboot.entity.Employee;
+
 import java.util.List;
 
 /**
- *
  * @author user
  */
 public interface EmployeeService {
-    List <Employee> getAllEmployees();
+    List<EmployeeDTO> getAllEmployees();
+
     void saveEmployee(Employee emp);
-    public Employee getEmployee(int id);
+
+    public EmployeeDTO getEmployee(int id);
+
     public void deleteEmployee(int id);
 }
