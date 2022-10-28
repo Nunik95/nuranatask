@@ -40,7 +40,7 @@ public class MyRESTController {
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeDTO);
     }
     @PostMapping("/employees")
-    public ResponseEntity<EmployeeDTO> addNewEmployee( @RequestBody Employee employee) {
+    public ResponseEntity<EmployeeDTO> addNewEmployee( @Valid @RequestBody Employee employee) {
         employeeService.saveEmployee(employee);
         EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(),
                 employee.getName(), employee.getSurname(),
@@ -49,7 +49,7 @@ public class MyRESTController {
 
     }
     @PutMapping("/employees")
-    public ResponseEntity<EmployeeDTO> updateEmployee(  @RequestBody Employee employee) {
+    public ResponseEntity<EmployeeDTO> updateEmployee(@Valid  @RequestBody Employee employee) {
         employeeService.saveEmployee(employee);
         EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getName(), employee.getSurname(), employee.getDepartment(), employee.getAge());
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeDTO);
