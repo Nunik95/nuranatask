@@ -11,9 +11,7 @@ import com.nuranaibrahimova.spring.springboot.spring_course_springboot.entity.Em
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,8 +63,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void saveEmployee(Employee emp) {
-        employeeRepository.save(emp);
+    public EmployeeDTO saveEmployee(Employee employee) {
+        employeeRepository.save(employee);
+        EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(),
+                employee.getName(), employee.getSurname(),
+                employee.getDepartment(), employee.getAge());
+        return employeeDTO;
     }
 
     @Override

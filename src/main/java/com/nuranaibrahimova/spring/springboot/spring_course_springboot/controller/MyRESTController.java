@@ -35,29 +35,25 @@ public class MyRESTController {
 
     @GetMapping("/employees/{id}")
     public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable int id) {
-        EmployeeDTO employeeDTO = null;
-        employeeDTO = employeeService.getEmployee(id);
+
+        EmployeeDTO employeeDTO = employeeService.getEmployee(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeDTO);
     }
     @PostMapping("/employees")
     public ResponseEntity<EmployeeDTO> addNewEmployee( @Valid @RequestBody Employee employee) {
-        employeeService.saveEmployee(employee);
-        EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(),
-                employee.getName(), employee.getSurname(),
-                employee.getDepartment(), employee.getAge());
+        EmployeeDTO employeeDTO=employeeService.saveEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeDTO);
 
     }
     @PutMapping("/employees")
     public ResponseEntity<EmployeeDTO> updateEmployee(@Valid  @RequestBody Employee employee) {
-        employeeService.saveEmployee(employee);
-        EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getName(), employee.getSurname(), employee.getDepartment(), employee.getAge());
+      EmployeeDTO employeeDTO=  employeeService.saveEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeDTO);
 
     }
     @DeleteMapping("/employees/{id}")
     public ResponseEntity deleteEmployee(@PathVariable int id) {
-        EmployeeDTO employee = employeeService.getEmployee(id);
+        //EmployeeDTO employee = employeeService.getEmployee(id);
         employeeService.deleteEmployee(id);
 
         return ResponseEntity.ok(HttpStatus.OK);
