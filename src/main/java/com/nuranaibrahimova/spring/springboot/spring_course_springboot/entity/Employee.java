@@ -41,7 +41,6 @@ public class Employee {
     @NotEmpty(message = "The department is required.")
     private String department;
     @Column(name = "age")
-    @NotEmpty(message = "The age is required.")
     @Min(value = 0, message = "age must be positive")
     private int age;
 
