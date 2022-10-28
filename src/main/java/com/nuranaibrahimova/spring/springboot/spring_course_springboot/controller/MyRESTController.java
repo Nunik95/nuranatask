@@ -14,7 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -37,14 +40,16 @@ public class MyRESTController {
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeDTO);
     }
     @PostMapping("/employees")
-    public ResponseEntity<EmployeeDTO> addNewEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<EmployeeDTO> addNewEmployee( @RequestBody Employee employee) {
         employeeService.saveEmployee(employee);
-        EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getName(), employee.getSurname(), employee.getDepartment(), employee.getAge());
+        EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(),
+                employee.getName(), employee.getSurname(),
+                employee.getDepartment(), employee.getAge());
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeDTO);
 
     }
     @PutMapping("/employees")
-    public ResponseEntity<EmployeeDTO> updateEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<EmployeeDTO> updateEmployee(  @RequestBody Employee employee) {
         employeeService.saveEmployee(employee);
         EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getName(), employee.getSurname(), employee.getDepartment(), employee.getAge());
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeDTO);

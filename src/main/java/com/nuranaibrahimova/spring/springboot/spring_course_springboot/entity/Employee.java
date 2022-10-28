@@ -4,6 +4,7 @@
  */
 package com.nuranaibrahimova.spring.springboot.spring_course_springboot.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "employees")
@@ -23,13 +28,21 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
     @Column(name = "name")
+    @NotEmpty(message = "The full name is required.")
+    @Size(min = 2, max = 100, message = "The length of full name must be between 2 and 100 characters.")
     private String name;
+
     @Column(name = "surname")
+    @NotEmpty(message = "The full surname is required.")
     private String surname;
     @Column(name = "department")
+    @NotEmpty(message = "The department is required.")
     private String department;
     @Column(name = "age")
+    @NotEmpty(message = "The age is required.")
+    @Min(value = 0, message = "age must be positive")
     private int age;
 
     public Employee() {
