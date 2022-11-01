@@ -20,13 +20,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+
     private final EmployeeRepository employeeRepository;
 
-    @Autowired
+@Autowired
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
-
     @Override
     public List<EmployeeDTO> getAllEmployees() {
 
@@ -42,6 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             dto.setAge(employee.getAge());
             employeelistDTO.add(dto);
         }
+
         return employeelistDTO;
     }
 
@@ -53,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (emp.isPresent()) {
             employee = emp.get();
 
-          employeeDTO.setId(employee.getId());
+            employeeDTO.setId(employee.getId());
             employeeDTO.setName(employee.getName());
             employeeDTO.setSurname(employee.getSurname());
             employeeDTO.setDepartment(employee.getDepartment());
@@ -76,5 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
 
     }
+
+
 
 }
