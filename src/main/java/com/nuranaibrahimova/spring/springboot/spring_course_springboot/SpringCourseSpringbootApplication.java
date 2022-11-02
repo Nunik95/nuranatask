@@ -28,7 +28,7 @@ public class SpringCourseSpringbootApplication {
   private static   LocalDateTime now = LocalDateTime.now();
 
 
-  private static  LocalDateTime whenToStart = LocalDate.now().atTime(now.getHour(), 33); // hour, minute
+  private static  LocalDateTime whenToStart = LocalDate.now().atTime(now.getHour(), 0); // hour, minute
 
   public static   Duration duration = Duration.between(now, whenToStart);
 
