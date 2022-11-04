@@ -36,7 +36,7 @@ public class ExportEmployeesTask extends Thread implements Runnable{
     private Mutex mutex;
 
     public void run() {
-        System.out.println(getState());
+
         try {
             mutex. waitForGetRequest();
         } catch (InterruptedException e) {
