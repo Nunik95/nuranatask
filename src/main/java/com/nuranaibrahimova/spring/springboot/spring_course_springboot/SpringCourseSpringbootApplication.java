@@ -34,27 +34,9 @@ public class SpringCourseSpringbootApplication {
         SpringApplication.run(SpringCourseSpringbootApplication.class, args);
     }
 
-//    @Bean
-//    public TaskExecutor taskExecutor() {
-//        return new SimpleAsyncTaskExecutor(); // Or use another one of your liking
-//    }
-
-//    @Bean
-//    public CommandLineRunner schedulingRunner(@Qualifier("taskExecutor") TaskExecutor executor) {
-//
-//
-//        return new CommandLineRunner() {
-//            @Override
-//            public void run(String... args) throws Exception {
-//                executor.execute(new ExportEmployeesTask());
-//            }
-//        };
-//        }
-//    }
-
 
     @Bean
-    //@Scope("prototype")
+
 
     public ScheduledExecutorService scheduledExecutorService() {
         ScheduledExecutorService scheduler
