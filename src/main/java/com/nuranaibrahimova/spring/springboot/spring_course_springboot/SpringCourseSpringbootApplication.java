@@ -1,56 +1,68 @@
 package com.nuranaibrahimova.spring.springboot.spring_course_springboot;
 
-import com.nuranaibrahimova.spring.springboot.spring_course_springboot.controller.MyRESTController;
+
 import com.nuranaibrahimova.spring.springboot.spring_course_springboot.threads.ExportEmployeesTask;
+
+import com.nuranaibrahimova.spring.springboot.spring_course_springboot.threads.Mutex;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.context.annotation.ApplicationScope;
-import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.context.annotation.Scope;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
-import java.time.*;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
+
 public class SpringCourseSpringbootApplication {
     @Autowired
-    private ExportEmployeesTask task;
+    private  ExportEmployeesTask task;
     private static final ScheduledExecutorService executorService
             = Executors.newSingleThreadScheduledExecutor();
-
-  private static   LocalDateTime now = LocalDateTime.now();
-
-
-  private static  LocalDateTime whenToStart = LocalDate.now().atTime(now.getHour(), 0); // hour, minute
-
-  public static   Duration duration = Duration.between(now, whenToStart);
-
-
     public static void main(String[] args) {
-        System.out.println("duration "+ duration);
 
-        SpringApplication.run(SpringCourseSpringbootApplication.class, args);}
+        SpringApplication.run(SpringCourseSpringbootApplication.class, args);
+    }
 
-            @Bean
+//    @Bean
+//    public TaskExecutor taskExecutor() {
+//        return new SimpleAsyncTaskExecutor(); // Or use another one of your liking
+//    }
+
+//    @Bean
+//    public CommandLineRunner schedulingRunner(@Qualifier("taskExecutor") TaskExecutor executor) {
+//
+//
+//        return new CommandLineRunner() {
+//            @Override
+//            public void run(String... args) throws Exception {
+//                executor.execute(new ExportEmployeesTask());
+//            }
+//        };
+//        }
+//    }
+
+
+    @Bean
+    //@Scope("prototype")
 
     public ScheduledExecutorService scheduledExecutorService() {
         ScheduledExecutorService scheduler
                 = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleWithFixedDelay(task, 0, 1, TimeUnit.NANOSECONDS);
 
+     task.start();
 
-                duration = Duration.between(now, whenToStart);
-                if (duration.isNegative()) duration=Duration.between(now, whenToStart.plusHours(1));
-        scheduler.scheduleWithFixedDelay(task, SpringCourseSpringbootApplication.duration.getSeconds(), 1, TimeUnit.HOURS);
-                task.start();
         return scheduler;
     }
-    }
-
-
+}
